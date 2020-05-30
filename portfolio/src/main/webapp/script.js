@@ -26,3 +26,14 @@ function addRandomGreeting() {
   const greetingContainer = document.getElementById('greeting-container');
   greetingContainer.innerText = greeting;
 }
+function addRandomIntro() {
+  const intros =
+      ['Student', 'Developer', 'Woman', 'Human'];
+
+  // Pick a random greeting.
+  const intro = intros[Math.floor(Math.random() * intros.length)];
+
+  // Add it to the page.
+  const introContainer = document.getElementById('intro-container');
+  introContainer.innerText = intro;
+}

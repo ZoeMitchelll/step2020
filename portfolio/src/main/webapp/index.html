@@ -1,18 +1,39 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title>My Portfolio</title>
+    <title>Introducing Me</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
+    <style type = "text/css">
+    canvas{
+        border: 1px solid green;
+    }
+    </style>
   </head>
   <body>
-    <div id="content">
-      <h1>My Portfolio</h1>
-      <p>This is my portfolio.</p>
-      <p>Click here to get a random message:</p>
-      <button onclick="addRandomGreeting()">Hello</button>
-      <div id="greeting-container"></div>
-    </div>
+        <div id="content">
+            <div class="top">
+                <h>Zoe Mitchell</h>
+            </div>
+
+            <div class="pics">
+                <!-- <div class="sliding-background"> -->
+                <img src="images/profile.png" class="center"/>
+            </div>
+
+            <div class="container">
+                <button class="button" onclick="addRandomGreeting()">Hello World</button>
+                <div id="greeting-container"></div>
+                 <button class="button" onclick="addRandomIntro()">I am a...</button>
+                 <div id="intro-container"></div>
+            </div>
+
+            <!-- <div class="middle">
+
+            </div>
+            <div class="bottom"></div> -->
+        </div>
+    <!-- <script src="canvas.js"></script> -->
   </body>
 </html>
