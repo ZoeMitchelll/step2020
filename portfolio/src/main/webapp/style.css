@@ -74,10 +74,10 @@ div.pics {
   background-color: rgb(100, 42, 1);
 }
 div.container {
-  height: 280px;
+  height: 300px;
   /* border: 2px solid rgba(255, 217, 0);
   background-color: #99ffcc; */
-  background-color: rgba(85, 107, 47, 0.897);
+  background-color: rgba(85, 107, 47);
   align-content: center;
 
 }
@@ -92,9 +92,8 @@ div.middle{
 }
 
 .sliding-background {
-  background: url("image/fog.jpg") repeat-x;
-  height: 560px;
-  width: 5076px;
+  /* background: url("images/ocean.png") repeat-x; */
+  width: 50%;
   animation: slide 60s linear infinite;
 }
 
@@ -103,6 +102,6 @@ div.middle{
     transform: translate3d(0, 0, 0);
   }
   100%{
-    transform: translate3d(-1692px, 0, 0);
+    transform: translate3d(-700px, 0, 0);
   }
 }
