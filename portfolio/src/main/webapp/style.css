@@ -28,10 +28,11 @@
 }
 
 body {
-  background-image: url(images/moon.png);
+  background-image: url(images/ocean.png);
   margin: 0;
   font-family: "Lucida Console", Courier, monospace;
-  /* background-repeat: none; */
+  background-repeat: none;
+  background-size: cover;
   /* animation: 5s linear infinite; */
 }
 
@@ -74,15 +75,15 @@ div.pics {
 }
 div.container {
   height: 280px;
-  /* border: 2px solid rgba(255, 217, 0, 0.363);
+  /* border: 2px solid rgba(255, 217, 0);
   background-color: #99ffcc; */
   background-color: rgba(85, 107, 47, 0.897);
   align-content: center;
 
 }
-div.bottom {
+div.middle{
    height: 20%;
-  border: 2px solid rgba(65, 105, 225, 0.555);
+  border: 2px solid rgba(65, 105, 225);
   background-color:#0099ff7c; 
 }
 
