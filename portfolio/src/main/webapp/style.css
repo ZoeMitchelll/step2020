@@ -63,20 +63,14 @@ p{
 
 div.top {
   height:100px;
-  /* border: 2px solid rgba(128, 0, 0, 0.685); */
-  /* background-color: #47230073; */
   background-color: rgb(199, 125, 28);
 }
 div.pics {
   height:380px;
-  /* border: 2px solid lightsteelblue; */
-  /* background-color: #ffccff71; */
   background-color: rgb(100, 42, 1);
 }
 div.container {
   height: 315px;
-  /* border: 2px solid rgba(255, 217, 0);
-  background-color: #99ffcc; */
   background-color: rgba(85, 107, 47);
   align-content: center;
 
@@ -92,7 +86,6 @@ div.middle{
 }
 
 .sliding-background {
-  /* background: url("images/ocean.png") repeat-x; */
   width: 50%;
   animation: slide 60s linear infinite;
 }
