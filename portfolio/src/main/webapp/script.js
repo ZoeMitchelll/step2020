@@ -37,3 +37,9 @@ function addRandomIntro() {
   const introContainer = document.getElementById('intro-container');
   introContainer.innerText = intro;
 }
+
+async function getRandomQuoteUsingAsyncAwait() {
+  const response = await fetch('/data');
+  const quote = await response.text();
+  document.getElementById('quote-container').innerText = quote;
+}
