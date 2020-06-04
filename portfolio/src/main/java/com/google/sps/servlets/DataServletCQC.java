@@ -19,21 +19,27 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
 
 @WebServlet("/my-CQCs")
 public class DataServletCQC extends HttpServlet { //Data Servlet for Comment Question Concern form in portfolio
-  ArrayList<String[]> responses = new ArrayList<>();
+  
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String name = request.getParameter("email-input");
     String type = request.getParameter("type-input");
     String description = request.getParameter("description-input");
 
-    responses.add([name,type,description]);
-    response.setContentType("text/html;");
-    response.getWriter().println("<p>Email: " + name + "</p>");
-    response.getWriter().println("<p>Type: " + type + "</p>");
-    response.getWriter().println("<p>Description: " + description + "</p>");
+    Entity taskEntity = new Entity("Task");
+    taskEntity.setProperty("email", name);
+    taskEntity.setProperty("type", type);
+    taskEntity.setProperty("description", description);
+
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    datastore.put(taskEntity);
+    response.sendRedirect("https://8080-ce9b1333-f415-4932-b49e-9f5485a4313c.us-central1.cloudshell.dev/");
   }
 
   /**
