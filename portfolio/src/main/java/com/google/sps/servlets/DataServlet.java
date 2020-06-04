@@ -30,9 +30,6 @@ public class DataServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("application/json;");
     //response.getWriter().println("Hello Zoe!");
-    response.getWriter().println(new Gson().toJson(values));
+    response.getWriter().println(new Gson().toJson("volume"));
   }
-
-  ArrayList<String> values = new ArrayList<>(Arrays.asList("hello", "there", "world"));
-
 }
