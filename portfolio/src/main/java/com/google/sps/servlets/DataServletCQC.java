@@ -23,9 +23,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
+/* Data Servlet for Comment Question Concern form in portfolio. */
 @WebServlet("/my-CQCs")
-public class DataServletCQC extends HttpServlet { //Data Servlet for Comment Question Concern form in portfolio
+public class DataServletCQC extends HttpServlet {
   
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
