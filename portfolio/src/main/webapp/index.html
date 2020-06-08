@@ -11,7 +11,7 @@
     }
     </style>
   </head>
-  <body>
+  <body onload="loadTasks()">
         <div id="content">
             <div class="top">
                 <h>Zoe Mitchell</h>
@@ -62,10 +62,15 @@
                     <br/><br/>
 
                     <input type="submit"/>
-                </form>
-                <div id="results"></div>
+                </form> 
+                <hr/>              
+                <ul id="reviews">
+                </ul>
             </div>
             <script src="canvas.js"></script>
+            <!-- <div id="results">
+                <p>Hiya</p>
+            </div> -->
         </div>
 
   </body>
