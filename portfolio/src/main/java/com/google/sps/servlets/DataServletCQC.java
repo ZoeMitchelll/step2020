@@ -39,7 +39,7 @@ public class DataServletCQC extends HttpServlet { //Data Servlet for Comment Que
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(taskEntity);
-    response.sendRedirect("https://8080-ce9b1333-f415-4932-b49e-9f5485a4313c.us-central1.cloudshell.dev/");
+    response.sendRedirect("/");
   }
 
   /**
