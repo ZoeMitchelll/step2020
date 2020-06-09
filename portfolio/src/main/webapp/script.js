@@ -50,10 +50,17 @@ async function loadTasks() {
         let reviewsElem = document.getElementById("reviews");
         let commentElem = document.createElement("DIV");
         commentElem.appendChild(document.createTextNode(list[c].type+" "+list[c].description));
-        reviewsElem.appendChild(commentElem);
+        if(!reviewsElem.contains(commentElem))
+            reviewsElem.appendChild(commentElem);
     }
 }
 async function loginStatus() {
     let status = await fetch('/status').then(response => response.json());
-    console.log(status)
+    console.log(status);
+    //let cqcForm = document.getElementById("cqcForm");
+    if (status==0){//'Currently logged in as Guest.'){
+        document.getElementById("cqcForm").style.display="none";
+    }else{
+        document.getElementById("cqcForm").style.display="block";
+    }
 }
