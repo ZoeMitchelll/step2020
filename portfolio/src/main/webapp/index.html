@@ -48,8 +48,6 @@
             <div id="bottom">
                 <p>Please feel free to drop some questions, comments, and concerns if you have any:</p>
                 <form id="cqcForm" name="cqcForm" action="/my-CQCs" method="POST">
-                    <input type="text" name="email-input" placeholder="Your Email"/>
-                    <br></br>
 
                     <select name="type-input">
                         <option value="question">Question</option>
@@ -69,7 +67,7 @@
             </div>
             <button onclick="window.location.href='/login'">Login</button>
             <button onclick="window.location.href='/logout'">Logout</button>
-            <button onclick="loadTasks()">Show Comments</button>
+            <button id="showCQC" onclick="loadTasks()">Show Comments</button>
             <script src="canvas.js"></script>
         </div>
 

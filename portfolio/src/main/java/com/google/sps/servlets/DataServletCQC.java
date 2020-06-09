@@ -20,6 +20,8 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,14 +37,15 @@ public class DataServletCQC extends HttpServlet {
   
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String email = request.getParameter("email-input");
     String type = request.getParameter("type-input");
     String description = request.getParameter("description-input");
     long timestamp = System.currentTimeMillis();
 
+    UserService userService = UserServiceFactory.getUserService();
+
     Entity taskEntity = new Entity("Comment");
     taskEntity.setProperty("timestamp", timestamp);
-    taskEntity.setProperty("email", email);
+    taskEntity.setProperty("email", userService.getCurrentUser().getEmail());
     taskEntity.setProperty("type", type);
     taskEntity.setProperty("description", description);
 
