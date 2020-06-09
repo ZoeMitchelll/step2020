@@ -48,12 +48,12 @@ public class ListTasksServlet extends HttpServlet {
         String type = (String) entity.getProperty("type");
         String description = (String) entity.getProperty("description");
         long timestamp = (long) entity.getProperty("timestamp");
-
-      comments.add(new Comment(id, timestamp, email, type, description););
+        Comment c = new Comment(id, timestamp, email, type, description);
+        comments.add(c);
     }
 
+    String s = new Gson().toJson(comments);
     response.setContentType("application/json;");
-    response.getWriter().println(new Gson().toJson(comments));
-    response.getWriter().println(new Gson().toJson("load is being called"));
+    response.getWriter().println(s);
   }
 }

@@ -30,4 +30,8 @@ public final class Comment {
     this.description = description;
     this.timestamp = timestamp;
   }
+
+  public String toString(){
+      return type + "\n" + description;
+  }
 }

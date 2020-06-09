@@ -44,9 +44,12 @@ async function getRandomQuoteUsingAsyncAwait() {
   document.getElementById('quote-container').innerText = quote;
 }
 
-function loadTasks() {
-    let list = fetch('/list-tasks').then(response => response.json());
+async function loadTasks() {
+    let list = await fetch('/list-tasks').then(response => response.json());
     for(c in list){ 
-        document.getElementById("reviews").appendChild(document.createElement("DIV").appendChild(document.createTextNode(c.type.innerHTML+=c.description.outerHTML)));
+        let reviewsElem = document.getElementById("reviews");
+        let commentElem = document.createElement("DIV");
+        commentElem.appendChild(document.createTextNode(list[c].type+" "+list[c].description));
+        reviewsElem.appendChild(commentElem);
     }
 }
