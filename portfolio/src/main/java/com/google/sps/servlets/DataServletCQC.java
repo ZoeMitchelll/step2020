@@ -31,7 +31,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/* Data Servlet for Comment Question Concern form in portfolio */
+/* Data Servlet for Comment Question Concern form in portfolio. */
 @WebServlet("/my-CQCs")
 public class DataServletCQC extends HttpServlet {
   
@@ -51,7 +51,8 @@ public class DataServletCQC extends HttpServlet {
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(taskEntity);
-    response.sendRedirect("/index.html#bottom");
+
+    response.sendRedirect("/");
   }
 
   /**
