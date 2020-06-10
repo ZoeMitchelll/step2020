@@ -43,3 +43,13 @@ async function getRandomQuoteUsingAsyncAwait() {
   let quote = await response.text();
   document.getElementById('quote-container').innerText = quote;
 }
+
+async function loadTasks() {
+    let list = await fetch('/list-tasks').then(response => response.json());
+    for(c in list){ 
+        let reviewsElem = document.getElementById("reviews");
+        let commentElem = document.createElement("DIV");
+        commentElem.appendChild(document.createTextNode(list[c].type+" "+list[c].description));
+        reviewsElem.appendChild(commentElem);
+    }
+}

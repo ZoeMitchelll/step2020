@@ -21,6 +21,7 @@ import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.gson.Gson;
+import com.google.sps.data.Comment;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,38 +30,30 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/* Data Servlet for Comment Question Concern form in portfolio. */
-@WebServlet("/my-CQCs")
-public class DataServletCQC extends HttpServlet {
-  
+/** Servlet responsible for listing tasks. */
+@WebServlet("/list-tasks")
+public class ListTasksServlet extends HttpServlet {
+
   @Override
-  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String email = request.getParameter("email-input");
-    String type = request.getParameter("type-input");
-    String description = request.getParameter("description-input");
-    long timestamp = System.currentTimeMillis();
-
-    Entity taskEntity = new Entity("Comment");
-    taskEntity.setProperty("timestamp", timestamp);
-    taskEntity.setProperty("email", email);
-    taskEntity.setProperty("type", type);
-    taskEntity.setProperty("description", description);
-
+  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    
+    Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-    datastore.put(taskEntity);
+    PreparedQuery results = datastore.prepare(query);
 
-    response.sendRedirect("/");
-  }
-
-  /**
-   * @return the request parameter, or the default value if the parameter
-   *         was not specified by the client
-   */
-  private String getParameter(HttpServletRequest request, String name, String defaultValue) {
-    String value = request.getParameter(name);
-    if (value == null) {
-      return defaultValue;
+    List<Comment> comments = new ArrayList<>();
+    for (Entity entity : results.asIterable()) {
+        long id = entity.getKey().getId();
+        String email = (String) entity.getProperty("email");
+        String type = (String) entity.getProperty("type");
+        String description = (String) entity.getProperty("description");
+        long timestamp = (long) entity.getProperty("timestamp");
+        Comment c = new Comment(id, timestamp, email, type, description);
+        comments.add(c);
     }
-    return value;
+
+    String s = new Gson().toJson(comments);
+    response.setContentType("application/json;");
+    response.getWriter().println(s);
   }
 }

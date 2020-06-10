@@ -14,21 +14,35 @@
 
 package com.google.sps.servlets;
 
-import com.google.gson.Gson;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-
-/** Servlet that returns some example content. TODO: modify this file to handle comments data */
-@WebServlet("/data")
-public class DataServlet extends HttpServlet {
+@WebServlet("/logout")
+public class Logout extends HttpServlet {
+    private static final Logger log = LoggerFactory.getLogger(Logout.class);
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    response.setContentType("application/json;");
-    response.getWriter().println(new Gson().toJson("volume"));
-  }
+    response.setContentType("text/html");
+
+    UserService userService = UserServiceFactory.getUserService();
+    if (userService.isUserLoggedIn()) {
+        String urlToRedirectToAfterUserLogsOut = "/";
+        String logoutUrl = userService.createLogoutURL(urlToRedirectToAfterUserLogsOut);
+        response.getWriter().println("user is now logged out");
+        log.info("user is now logged out");
+        response.sendRedirect(logoutUrl);
+    } else {
+        response.getWriter().println("user is already logged out"); 
+        log.info("user is already logged out");
+        response.sendRedirect("/");       
+    }
+ }
 }
