@@ -31,9 +31,6 @@
   color: rgb(199, 125, 28);
   background-color:#636B59;
   height: 10vh;
-  margin: auto;
-  align-items: center;
-  justify-content: center;
 }
 
 #pics {
@@ -45,9 +42,7 @@
 
 #bottom{
    /* height: 20%; */
-  /* background-color:rgb(65, 105, 225); */
-  font-size: 20px;
-  background-color: rgb(199, 125, 28);
+  
 }
 
 header .logo, header .plus-menu {
@@ -57,7 +52,6 @@ header .logo, header .plus-menu {
 .header {
   padding: 10px 16px;
   background: #555;
-  color: #f1f1f1;
 }
 
 body {
@@ -71,44 +65,55 @@ body {
 
 h{
     text-align: center;
-    font-size: 20px;
-    font-family: "Lucida Console", Courier, monospace
+    font-family: 'Trirong', serif;
+    margin-top: 34%;
+    color: #bba686;
+    font-size: 70px;
+    margin-left:34%;
 }
 h1{
     text-align: center;
+    font-family: 'Great Vibes', cursive;
+    color: rgb(95, 93, 93);
+    font-size: 40px;
 }
 p{
     text-align: center;
-    font-size: 13px;
+    color: #cdccd4;
+    font-family: 'Public Sans', sans-serif;
+    font-size:70px;
+}
+p1{
+    text-align: center;
+    font-family: 'Cantarell', sans-serif;
+    font-size: 24px;
+    color: rgb(223, 217, 217);
 }
 .center {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  margin-top: auto;
-  margin-bottom: auto;
-  width: 50%;
+  width: 60%;
+  height: 100%;
   
 }
 
-div.top {
-  /* height:100px; */
-  /* background-color: rgb(199, 125, 28); */
+#top{
+    background-color: #4f2e66;
 }
 
 div.container {
-  /* height: 400px; */
-  /* background-color: rgba(85, 107, 47); */
-  align-content: center;
+  background-color:#5A815C;
 
 }
 div.middle{
-   /* height: 20%; */
-  /* background-color:#0099ff7c;  */
+  background-color:#747c24; 
 }
 div.quote-container{
-   color: white;
-  /* background-color:#0099ff7c;  */
+    margin-right: 50%;
+    width: 50%;
+    animation: slide 20s linear infinite;
+
 }
 
 .container {
@@ -118,7 +123,9 @@ div.quote-container{
 
 .sliding-background {
   width: 50%;
-  animation: slide 60s linear infinite;
+  animation: slide 20s linear infinite;
+  margin-left: 50%;
+  padding-bottom: 7%;
 }
 
 @keyframes slide{
@@ -126,9 +133,10 @@ div.quote-container{
     transform: translate3d(0, 0, 0);
   }
   100%{
-    transform: translate3d(-700px, 0, 0);
+    transform: translate3d(-300px, 0, 0);
   }
 }
+
 
 /* width */
 ::-webkit-scrollbar {
