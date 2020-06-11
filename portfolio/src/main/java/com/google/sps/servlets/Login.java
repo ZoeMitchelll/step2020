@@ -33,17 +33,15 @@ public class Login extends HttpServlet {
     response.setContentType("text/html");
 
     UserService userService = UserServiceFactory.getUserService();
-    if (userService.isUserLoggedIn()) {
-      String userEmail = userService.getCurrentUser().getEmail();
-      response.getWriter().println("user is already logged in");
-      log.info("user is already logged in");
-      response.sendRedirect("/");
-    } else {
-      String urlToRedirectToAfterUserLogsIn = "/";
-      String loginUrl = userService.createLoginURL(urlToRedirectToAfterUserLogsIn);
-      response.getWriter().println("user is now logged in");
-      log.info("user is now logged in");
-      response.sendRedirect(loginUrl);
+    String logMsg = "user is now logged in";
+    String redirectUrl = "/";
+
+    if (!userService.isUserLoggedIn()) {
+    logMsg = "user is already logged in";
+    redirectUrl = userService.createLoginURL("/");
     }
-  }
+    response.getWriter().println(logMsg);
+    log.info(logMsg);
+    response.sendRedirect(redirectUrl);
+    }
 }

@@ -17,25 +17,30 @@
  */
 function addRandomGreeting() {
   var greetings =
-      ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
+  ['Hello world! I\'m a...', '¡Hola Mundo! Yo soy...', '你好，世界！我是...', 'Bonjour le monde! Je suis...'];
+    var greeting = greetings[Math.floor(Math.random() * greetings.length)];
+    var intros;
+    switch(greeting){
+        case 'Hello world! I\'m a...':
+            intros = ['Student.', 'Developer.', 'Woman.', 'Human.', 'Ambitious.','Conscientious.','Creative.'];
+            break;
+        case '¡Hola Mundo! Yo soy...':
+            intros = ['Estudiante.','Desarrollador.','Mujer.','Humano.','Ambicioso.','Concienzudo.','Creativo.'];
+            break;
+        case '你好，世界！我是...':
+            intros = ['学生。','开发人员。','女人。','人类。','雄心勃勃。','尽责。','创意。'];
+            break;
+        case 'Bonjour le monde! Je suis...':
+            intros = ['Étudiant.','Développeur.','Femme.','Humain.','Ambitieux.','Consciencieux.','Créatif.'];
+            break;
+    }
 
-  // Pick a random greeting.
-  var greeting = greetings[Math.floor(Math.random() * greetings.length)];
+  var intro1 = intros[Math.floor(Math.random() * intros.length)];
+  var intro2 = intros[Math.floor(Math.random() * intros.length)];
+  var intro3 = intros[Math.floor(Math.random() * intros.length)];
 
-  // Add it to the page.
-  const greetingContainer = document.getElementById('greeting-container');
-  greetingContainer.innerText = greeting;
-}
-function addRandomIntro() {
-  var intros =
-      ['Student', 'Developer', 'Woman', 'Human'];
-
-  // Pick a random greeting.
-  var intro = intros[Math.floor(Math.random() * intros.length)];
-
-  // Add it to the page.
   const introContainer = document.getElementById('intro-container');
-  introContainer.innerText = intro;
+  introContainer.innerText = greeting+ "        "+intro1 + "     " + intro2 + "     " + intro3;
 }
 
 async function getRandomQuoteUsingAsyncAwait() {
@@ -45,25 +50,54 @@ async function getRandomQuoteUsingAsyncAwait() {
 }
 
 async function loadTasks() {
-    let list = await fetch('/list-tasks').then(response => response.json());
+    let response = await fetch('/list-tasks');
+    let list = await response.json();
     for(c in list){ 
         let reviewsElem = document.getElementById("reviews");
         let commentElem = document.createElement("DIV");
         commentElem.appendChild(document.createTextNode(list[c].email+": "+list[c].description));
+        reviewsElem.appendChild(commentElem);
     }
     document.getElementById("showCQC").onclick = null;
 }
 async function loginStatus() {
-    let status = await fetch('/status').then(response => response.json());
+    let login = await fetch('/status');
+    let status = await login.json();
     console.log(status);
-    if (status=='Currently logged in as Guest.'){
+    if (status==0){
         document.getElementById("cqcForm").style.display="none";
     }else{
         document.getElementById("cqcForm").style.display="block";
     }
 }
 
-async function getEmail(){
-    let email = await fetch('/user').then(response => response.json());
+function findOffset(element) {
+  var top = 0, left = 0;
 
+  do {
+    top += element.offsetTop  || 0;
+    left += element.offsetLeft || 0;
+    element = element.offsetParent;
+  } while(element);
+
+  return {
+    top: top,
+    left: left
+  };
 }
+
+window.onload = function () {
+  var stickyHeader = document.getElementById('myHeader');
+  var headerOffset = findOffset(stickyHeader);
+
+  window.onscroll = function() {
+    // body.scrollTop is deprecated and no longer available on Firefox
+    var bodyScrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+
+    if (bodyScrollTop > headerOffset.top) {
+      stickyHeader.classList.add('fixed');
+    } else {
+      stickyHeader.classList.remove('fixed');
+    }
+  };
+};
