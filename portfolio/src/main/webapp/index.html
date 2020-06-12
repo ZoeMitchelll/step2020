@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <title>Introducing Me</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js">
-    </script>
+    <script src="script.js"></script>
+      <script ype="text/javascript" 
+      src="//maps.googleapis.com/maps/api/js?key=AIzaSyCgVT7Or_SXA6OTO7QmfqSWc8A-kr9cpc0&callback=initMap" 
+      ></script>
     <style type = "text/css">
     @import url('https://fonts.googleapis.com/css2?family=Cantarell:ital@1&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
@@ -59,6 +61,8 @@
                 <img class="center" src="images/chicago-sleep.jpg"/>
                 <p>And sleeping in odd positions.</p>
             </div>
+            <div id="map"></div>
+            <p1>This page shows a Google Map of Chicago, my hometown!</p>
             <div id="top"> 
                 <p1>Please feel free to drop some questions, comments, and concerns if you have any:</p1>
                 <form id="cqcForm" name="cqcForm" action="/my-CQCs" method="POST">
@@ -75,14 +79,12 @@
 
                     <input type="submit"/>
                 </form> 
-                <hr/>              
-                <ul id="reviews">
-                </ul>
+                <hr>              
+                <ul id="reviews"></ul>
             </div>
             <button onclick="window.location.href='/login'">Login</button>
             <button onclick="window.location.href='/logout'">Logout</button>
             <button id="showCQC" onclick="loadTasks()">Show Comments</button>
-            <script src="canvas.js"></script>
         </div>
 
   </body>
