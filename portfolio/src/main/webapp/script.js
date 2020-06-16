@@ -63,7 +63,6 @@ async function loadTasks() {
 async function loginStatus() {
     let login = await fetch('/status');
     let status = await login.json();
-    console.log(status);
     if (status==0){
         document.getElementById("cqcForm").style.display="none";
     }else{
