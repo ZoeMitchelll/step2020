@@ -15,9 +15,25 @@
 package com.google.sps;
 
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
 
 public final class FindMeetingQuery {
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
-    throw new UnsupportedOperationException("TODO: Implement this method.");
+    Long duration = request.getDuration();
+    Iterator<Event> iterator = events.iterator();
+    int start = TimeRange.getTimeInMinutes(0,0);
+    int end = TimeRange.getTimeInMinutes(0,0);
+    Collection<TimeRange> timeBlock = Collections.emptyList();
+    if(events.size()==0){
+        return Collections.emptyList();//TimeRange.WHOLE_DAY;
+    }
+    while (iterator.hasNext()) {
+        //iterate events and add time blocks of free time in TimeRange format to result.
+        //iterate through result and delte if less than duration
+        //timeBlock.add(new TimeRange(start,//end iterator.next().getWhen().))
+    }
+    return timeBlock;
+    
   }
 }
