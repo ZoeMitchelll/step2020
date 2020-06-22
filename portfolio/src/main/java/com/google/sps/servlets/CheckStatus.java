@@ -20,9 +20,10 @@ public class CheckStatus extends HttpServlet {
     PrintWriter out = response.getWriter();
     UserService userService = UserServiceFactory.getUserService();
     if (userService.isUserLoggedIn()) {
-        out.println(new Gson().toJson(1));
-    }else{
-        out.println(new Gson().toJson(0));
+        out.println(new Gson().toJson(true));
+    }
+    else {
+        out.println(new Gson().toJson(false));
     }
   }
 }

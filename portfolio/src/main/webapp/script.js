@@ -16,22 +16,22 @@
  * Adds a random greeting to the page.
  */
 function addRandomGreeting() {
-  var greetings =
+  let greetings =
   ['Hello world! I\'m a...', '¡Hola Mundo! Yo soy...', '你好，世界！我是...', 'Bonjour le monde! Je suis...'];
     var greeting = greetings[Math.floor(Math.random() * greetings.length)];
     var intros;
     switch(greeting){
         case 'Hello world! I\'m a...':
-            intros = ['Student.', 'Developer.', 'Woman.', 'Human.', 'Ambitious.','Conscientious.','Creative.'];
+            let intros = ['Student.', 'Developer.', 'Woman.', 'Human.', 'Ambitious.','Conscientious.','Creative.'];
             break;
         case '¡Hola Mundo! Yo soy...':
-            intros = ['Estudiante.','Desarrollador.','Mujer.','Humano.','Ambicioso.','Concienzudo.','Creativo.'];
+            let intros = ['Estudiante.','Desarrollador.','Mujer.','Humano.','Ambicioso.','Concienzudo.','Creativo.'];
             break;
         case '你好，世界！我是...':
-            intros = ['学生。','开发人员。','女人。','人类。','雄心勃勃。','尽责。','创意。'];
+            let intros = ['学生。','开发人员。','女人。','人类。','雄心勃勃。','尽责。','创意。'];
             break;
         case 'Bonjour le monde! Je suis...':
-            intros = ['Étudiant.','Développeur.','Femme.','Humain.','Ambitieux.','Consciencieux.','Créatif.'];
+            let intros = ['Étudiant.','Développeur.','Femme.','Humain.','Ambitieux.','Consciencieux.','Créatif.'];
             break;
     }
 
@@ -40,7 +40,7 @@ function addRandomGreeting() {
   var intro3 = intros[Math.floor(Math.random() * intros.length)];
 
   const introContainer = document.getElementById('intro-container');
-  introContainer.innerText = greeting+ "        "+intro1 + "     " + intro2 + "     " + intro3;
+  introContainer.innerText = greeting + "        " + intro1 + "     " + intro2  + "     " + intro3;
 }
 
 async function getRandomQuoteUsingAsyncAwait() {
@@ -55,7 +55,7 @@ async function loadTasks() {
     for(c in list){ 
         let reviewsElem = document.getElementById("reviews");
         let commentElem = document.createElement("DIV");
-        commentElem.appendChild(document.createTextNode(list[c].email+": "+list[c].description));
+        commentElem.appendChild(document.createTextNode(list[c].email + ": " + list[c].description));
         reviewsElem.appendChild(commentElem);
     }
     document.getElementById("showCQC").onclick = null;
@@ -63,11 +63,9 @@ async function loadTasks() {
 async function loginStatus() {
     let login = await fetch('/status');
     let status = await login.json();
-    console.log(status);
-    if (status==0){
+    document.getElementById("cqcForm").style.display="block";
+    if (status==false){
         document.getElementById("cqcForm").style.display="none";
-    }else{
-        document.getElementById("cqcForm").style.display="block";
     }
 }
 

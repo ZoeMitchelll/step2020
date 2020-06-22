@@ -37,7 +37,7 @@ public class Logout extends HttpServlet {
     String redirectUrl = userService.createLogoutURL("/");
 
     if (!userService.isUserLoggedIn()) {
-    logMsg = "user is now logged out";
+        logMsg = "user is now logged out";
     }
     
     response.getWriter().println(logMsg);

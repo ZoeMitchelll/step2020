@@ -37,8 +37,8 @@ public class Login extends HttpServlet {
     String redirectUrl = "/";
 
     if (!userService.isUserLoggedIn()) {
-    logMsg = "user is already logged in";
-    redirectUrl = userService.createLoginURL("/");
+        logMsg = "user is already logged in";
+        redirectUrl = userService.createLoginURL("/");
     }
     response.getWriter().println(logMsg);
     log.info(logMsg);
