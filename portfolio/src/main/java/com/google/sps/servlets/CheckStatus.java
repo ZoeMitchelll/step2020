@@ -21,8 +21,12 @@ public class CheckStatus extends HttpServlet {
     UserService userService = UserServiceFactory.getUserService();
     if (userService.isUserLoggedIn()) {
         out.println(new Gson().toJson(true));
+<<<<<<< HEAD
     }
     else {
+=======
+    }else{
+>>>>>>> 1e9b006429eac588504484c5c9e9fe1332bdf466
         out.println(new Gson().toJson(false));
     }
   }
