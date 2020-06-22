@@ -103,3 +103,8 @@ window.onload = function () {
     }
   };
 };
+}
+async function loginStatus() {
+    let status = await fetch('/status').then(response => response.json());
+    console.log(status)
+}
