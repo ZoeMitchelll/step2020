@@ -23,7 +23,7 @@ import java.util.List;
 
 public final class FindMeetingQuery {
     public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
-        Long duration = request.getDuration();
+        long duration = request.getDuration();
         int start = 0;
         Collection<TimeRange> timeBlock = new ArrayList();
         if(duration>TimeRange.WHOLE_DAY.duration()){
@@ -36,11 +36,12 @@ public final class FindMeetingQuery {
         int min = 0;
         while (min<=TimeRange.END_OF_DAY){
             int overlap = overlaps(events,TimeRange.fromStartEnd(start,min,true),request);
+            int prevOverlap = overlaps(events,TimeRange.fromStartEnd(start,min-1,true),request);
             if(min==TimeRange.END_OF_DAY ){
                 timeBlock.add(TimeRange.fromStartEnd(start,min,true));
                 return timeBlock;
             }
-            else if(overlap != 0){
+            else if(overlap != 0 && prevOverlap != 0){
                 timeBlock.add(TimeRange.fromStartEnd(start,min,false));
                 min = overlap;
                 start = overlap;
@@ -48,19 +49,15 @@ public final class FindMeetingQuery {
             min++;
         }
         /**deletes time intervals shorter than duration*/
-        Iterator<TimeRange> times = timeBlock.iterator();
-        while(times.hasNext()){
-            if(times.next().duration()<duration){
-                times.remove();
-            }
-        }
+        timeBlock.removeIf(n -> (n.duration() < duration));
 
         return timeBlock;
     }
 
     private int overlaps(Collection<Event> events, TimeRange currentTime, MeetingRequest request){
-        Iterator<Event> iterator = events.iterator();
+        //check if -1 overlaps
         int end = 0;
+        Iterator<Event> iterator = events.iterator();
         while (iterator.hasNext()) {
             Event e = iterator.next();
             if(!attending(e.getAttendees(),request.getAttendees())){
@@ -71,6 +68,8 @@ public final class FindMeetingQuery {
                 }
             }
         }
+        if (end != 0)
+            System.out.println(end);
         return end;
     }
 
