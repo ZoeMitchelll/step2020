@@ -22,44 +22,59 @@ import java.util.Iterator;
 import java.util.List;
 
 public final class FindMeetingQuery {
-  public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
-    Long duration = request.getDuration();
-    Iterator<Event> iterator = events.iterator();
-    int start = 0;
-    Collection<TimeRange> timeBlock = new ArrayList();
-    if(duration>TimeRange.WHOLE_DAY.duration()){
-        return Arrays.asList();
-    }
-    if(events.size()==0 ){
-        return Arrays.asList(TimeRange.WHOLE_DAY);
-    }
-    /**returns all time intervals between events*/
-    while (iterator.hasNext()) {
-        Event e = iterator.next();
+    public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
+        Long duration = request.getDuration();
+        int start = 0;
+        Collection<TimeRange> timeBlock = new ArrayList();
+        if(duration>TimeRange.WHOLE_DAY.duration()){
+            return Arrays.asList();
+        }
+        if(events.size()==0 ){
+            return Arrays.asList(TimeRange.WHOLE_DAY);
+        }
+        /**returns all time intervals between events*/
         int min = 0;
         while (min<=TimeRange.END_OF_DAY){
-            if(min==TimeRange.END_OF_DAY){
+            int overlap = overlaps(events,TimeRange.fromStartEnd(start,min,true),request);
+            if(min==TimeRange.END_OF_DAY ){
                 timeBlock.add(TimeRange.fromStartEnd(start,min,true));
                 return timeBlock;
             }
-            else if (e.getWhen().overlaps(TimeRange.fromStartEnd(start,min,true))){
-                if(!Collections.disjoint(e.getAttendees(), request.getAttendees())){
-                        timeBlock.add(TimeRange.fromStartEnd(start,min,false));
-                        min = e.getWhen().end();
-                        start = e.getWhen().end();
-                }
+            else if(overlap != 0){
+                timeBlock.add(TimeRange.fromStartEnd(start,min,false));
+                min = overlap;
+                start = overlap;
             }
             min++;
         }
-    }
-    /**deletes time intervals shorter than duration*/
-    Iterator<TimeRange> times = timeBlock.iterator();
-    while(times.hasNext()){
-        if(times.next().duration()<duration){
-            times.remove();
+        /**deletes time intervals shorter than duration*/
+        Iterator<TimeRange> times = timeBlock.iterator();
+        while(times.hasNext()){
+            if(times.next().duration()<duration){
+                times.remove();
+            }
         }
+
+        return timeBlock;
     }
 
-    return timeBlock;
-  }
+    private int overlaps(Collection<Event> events, TimeRange currentTime, MeetingRequest request){
+        Iterator<Event> iterator = events.iterator();
+        int end = 0;
+        while (iterator.hasNext()) {
+            Event e = iterator.next();
+            if(!attending(e.getAttendees(),request.getAttendees())){
+                if (e.getWhen().overlaps(currentTime)){
+                    if(e.getWhen().end()>end){
+                        end = e.getWhen().end();
+                    }
+                }
+            }
+        }
+        return end;
+    }
+
+    private boolean attending(Collection<String> eventAtendees, Collection<String> meetingAtendees){
+        return Collections.disjoint(eventAtendees, meetingAtendees);
+    }
 }
