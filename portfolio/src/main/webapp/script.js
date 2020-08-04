@@ -60,15 +60,12 @@ async function loadTasks() {
     }
     document.getElementById("showCQC").onclick = null;
 }
+
 async function loginStatus() {
     let login = await fetch('/status');
     let status = await login.json();
-<<<<<<< HEAD
     document.getElementById("cqcForm").style.display="block";
     if (status==false){
-=======
-    if (status==0){
->>>>>>> 1e9b006429eac588504484c5c9e9fe1332bdf466
         document.getElementById("cqcForm").style.display="none";
     }
 }
@@ -103,7 +100,7 @@ window.onload = function () {
     }
   };
 };
-}
+
 async function loginStatus() {
     let status = await fetch('/status').then(response => response.json());
     console.log(status)
