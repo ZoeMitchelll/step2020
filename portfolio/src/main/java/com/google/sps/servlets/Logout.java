@@ -33,16 +33,15 @@ public class Logout extends HttpServlet {
     response.setContentType("text/html");
 
     UserService userService = UserServiceFactory.getUserService();
-    if (userService.isUserLoggedIn()) {
-        String urlToRedirectToAfterUserLogsOut = "/";
-        String logoutUrl = userService.createLogoutURL(urlToRedirectToAfterUserLogsOut);
-        response.getWriter().println("user is now logged out");
-        log.info("user is now logged out");
-        response.sendRedirect(logoutUrl);
-    } else {
-        response.getWriter().println("user is already logged out"); 
-        log.info("user is already logged out");
-        response.sendRedirect("/");       
+    String logMsg = "user is already logged out";
+    String redirectUrl = userService.createLogoutURL("/");
+
+    if (!userService.isUserLoggedIn()) {
+        logMsg = "user is now logged out";
     }
- }
+    
+    response.getWriter().println(logMsg);
+    log.info(logMsg);
+    response.sendRedirect(redirectUrl);
+    }
 }

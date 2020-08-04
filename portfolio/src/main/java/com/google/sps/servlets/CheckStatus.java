@@ -1,5 +1,8 @@
 package com.google.sps.servlets;
 
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
+import com.google.gson.Gson;
 import com.google.gson.Gson;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
@@ -19,9 +22,9 @@ public class CheckStatus extends HttpServlet {
     PrintWriter out = response.getWriter();
     UserService userService = UserServiceFactory.getUserService();
     if (userService.isUserLoggedIn()) {
-        out.println(new Gson().toJson("Logged in as " + userService.getCurrentUser().getEmail() + "."));
-    }else{
-        out.println(new Gson().toJson("Currently logged in as Guest."));
+        out.println(new Gson().toJson(true));
     }
-  }
+    else {
+        out.println(new Gson().toJson(false));
+    }
 }

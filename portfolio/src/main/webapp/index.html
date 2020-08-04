@@ -4,33 +4,47 @@
     <meta charset="UTF-8">
     <title>Introducing Me</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
+    <script src="script.js">
+    </script>
     <style type = "text/css">
+    @import url('https://fonts.googleapis.com/css2?family=Cantarell:ital@1&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Trirong:wght@100&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@1,255&display=swap');
     canvas{
         border: 1px solid green;
     }
     </style>
   </head>
-  <body onload="loadTasks()">
+  <body onload="loginStatus(); addRandomGreeting();">
         <div id="content">
-            <div class="top">
-                <h>Zoe Mitchell</h>
-                <p>New Interest: Anything Backend       New Hobby: Stress Relieving     New Passion: Outside</p>
+            <div class="sticky" id="myHeader">
+                <h1>Zoe Mitchell</h1>
             </div>
 
-            <div class="pics">
-                <img src="images/profile.png" class="center"/>
+            <div id="pics">
+                <img src="images/profile-new.jpg" class="center"/>
             </div>
 
             <div class="container">
-                <button class="button" onclick="addRandomGreeting()">Hello World</button>
-                <div id="greeting-container"></div>
-                 <button class="button" onclick="addRandomIntro()">I am a...</button>
-                 <div id="intro-container"></div>
+                <div id="intro-container">
+                    <p1>
+                        Zoe represents "life" and that best describes my personality. 
+                        I am an easy going funny Chicagoan that enjoys watching international television shows. 
+                        I recently completed the final season of GoT and was left wanting a season 9. 
+                        There were story lines that were left unfinished and Aria could have had a spin off show 
+                        called "The Girl is No One". I like to problem solve. I like thinking about systematized ways
+                         of solving problems. When I was a little girl, I liked to watch Dora the Explorer and what 
+                         fascinated me most was her ability to use her skill set to find solutions within her 
+                         surrounds. Friendship is very important to me. I value the connections I have made with 
+                         people on my educational journey as they increase my level of happiness, provide support 
+                         during stressful situations, improve my self-worth and confidence. In the words of Winnie 
+                         the Pooh, 
+                         "a friend is one of the nicest things you can have and one of the best things you can be". 
+                    </p1>
+                </div>
                  <div class="sliding-background">
-                    <div class="bottom">
-                        <img class="center" src="images/hat.png"/>
-                    </div>
+                     <img class="center" src="images/hat.png"/>
                 </div>
             </div>
 
@@ -45,12 +59,16 @@
                 <img class="center" src="images/chicago-sleep.jpg"/>
                 <p>And sleeping in odd positions.</p>
             </div>
+
+            <div id="top"> 
+                <p1>Please feel free to drop some questions, comments, and concerns if you have any:</p1>
+                <form id="cqcForm" name="cqcForm" action="/my-CQCs" method="POST"/>
             <div id="bottom">
                 <p>Please feel free to drop some questions, comments, and concerns if you have any:</p>
                 <form action="/my-CQCs" method="POST">
                     <input type="text" name="email-input" placeholder="Your Email"/>
                     <br>
-
+                  
                     <select name="type-input">
                         <option value="question">Question</option>
                         <option value="comment">Comment</option>
@@ -69,9 +87,10 @@
             </div>
             <button onclick="window.location.href='/login'">Login</button>
             <button onclick="window.location.href='/logout'">Logout</button>
+            <button id="showCQC" onclick="loadTasks()">Show Comments</button>
             <button onclick="loginStatus()">Check Status</button>
             <script src="canvas.js"></script>
+            </div>
         </div>
-
   </body>
 </html>
